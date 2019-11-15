@@ -1,0 +1,39 @@
+{%extends 'mail/basic.html'%}
+{%load static%}
+
+{%block title%}@mps.edu | Forgot Password..!{%endblock%}
+{%block css%}
+.back-im{
+    background-image:url({%static 'mail/img/1.jpg'%});
+    background-size:cover;
+}
+{%endblock%}
+{%block body%}
+<div class="container-fluid">
+<div class="col-lg-5 mx-auto">
+	<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Forgot Password..!</h4>
+	<form action="/account/forgot_pwd/" method="post" class=" list-group-item back-im " autocomplete="off">{%csrf_token%}
+	<br><div class="form-group">
+		<input type="email" name="email" class="form-control" placeholder="Enter your email ID" required="true" autocomplete="off">
+	</div><br>
+	<div class="form-group">
+		<input type="password" name="security" class="form-control" placeholder="Enter your security Question" required="true" autocomplete="off">
+	</div><br>
+	<div class="form-group">
+	<input type="password" name="pwd" class="form-control" placeholder="Set your new password" required="true">
+	</div><br>
+	<div class="form-group">
+	<input type="password" name="cnfpwd" class="form-control" placeholder="Confirm your new password" required="true">
+	</div>
+	{%for msg in messages%}
+	{%if "success" in msg.tags%}
+	<p class="alert alert-success text-success ">{{msg}}</p>
+	{%else%}
+	<p class="alert alert-danger text-danger">{{msg}}</p>
+	{%endif%}
+	{%endfor%}
+	<button type="submit" class="btn btn-success">Submit</button>
+</form>
+</div>
+</div>
+{%endblock%}

@@ -1,0 +1,69 @@
+{%extends 'mail/basic.html'%}
+{%load static%}
+{%block title%}Sign up for @mps.edu | @mps.edu {%endblock%}
+{%block css%}
+#signup-img{
+	width:12vw;
+	height:12vw;
+}
+#input-email{
+	width:300px;
+}
+.back-im{
+    background-image:url({%static 'mail/img/1.jpg'%});
+    background-size:cover;
+}
+#sign-paragraph
+{
+    line-height:1.5;
+}
+{%endblock%}
+{%block body%}
+<div class="container">
+<div class="row">
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+        <h2 class="text-white font-weight-bolder">Create an account It's quick and easy.</h2><br>
+<h4 class="text-white" id="sign-paragraph">In professional world all the communications are being done by emails. Now a day’s mailing system is playing a very important
+role in our social and economical life. It is one of the secure and fast communicating mediums for a modern era.
+The mail system is also a good source to connect with your friends; @mps Mailing system helps you to send emails to your friends, who are already registered.
+It allows a user to transfer text and data like picture, video, mp3, etc.</h4>
+
+</div>
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<form action="/account/signup/" method="post" autocomplete="off" class="list-group-item back-im ">{%csrf_token%}
+<div class="row">
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<div class="form-group">
+<label for="fname">First Name:</label>
+<input type="name" name="fname" class="form-control" placeholder="enter your first name" autocomplete="off">
+</div>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<div class="form-group">
+<label for="lname">Last Name:</label>
+<input type="name" name="lname" class="form-control" placeholder="enter your last name" autocomplete="off">
+</div>
+</div>
+</div>
+<div class="form-group">
+<label for="name">Username:</label>
+<input type="name" name="name" class="form-control d-inline" id="input-email" placeholder="username" autocomplete="off"><span class="bg-white py-2 px-1 mx-0 font-weight-bolder d-md-none d-sm-none d-lg-inline">@mps.edu</span>
+{%for msg in messages%}
+<p class="alert alert-danger text-danger mt-2">{{msg}}</p>
+{%endfor%}
+</div>
+{%for field in form%}
+<div class="form-group">
+{{field.label_tag}}&nbsp&nbsp{{field}}
+</div>
+{%endfor%}
+<div class="form-group">
+<label for="pwd">Password:</label>
+<input type="Password" name="pwd" class="form-control" placeholder="Enter your new Password" required="true">
+</div>
+<button type="submit" class="btn btn-success font-weight-bolder px-4">Sign up</button>
+</form>
+</div>
+</div>
+</div>
+{%endblock%}

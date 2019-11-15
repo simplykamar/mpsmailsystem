@@ -1,0 +1,54 @@
+{%extends 'mail/basic.html'%}
+{%block title%}{{user.username|title}} | edit profile{%endblock%}
+
+{%block body%}
+<div class="container">
+<div class="row">
+{%include "account/profile_basic.html"%}
+	<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12">
+		<h6 class="list-group-item bg-danger text-white font-weight-bolder">Change Your Detail</h6>
+	<div class="list-group-item ">
+	<form action="/account/edit_profile/" method="post">{%csrf_token%}
+	<div class="form-group">
+<label for="fname"><b>First Name:</b></label>
+<input type="name" name="fname" value="{{user.first_name}}" class="form-control" placeholder="Enter your first name" autocomplete="off">
+</div>
+	<div class="form-group">
+<label for="lname"><b>Last Name:</b></label>
+<input type="name" name="lname" value="{{user.last_name}}" class="form-control" placeholder="Enter your last name" autocomplete="off">
+</div>
+<div class="form-group">
+<label for="gender"><b>Gender: &nbsp</b></label>
+<select name="gender">
+<option value="{{profile.gender}}">{{profile.gender}}</option>
+{%if profile.gender == "Male"%}
+<option value="Female">Female</option>
+{%else%}
+<option value="Male">Male</option>
+{%endif%}
+</select>
+</div>
+<div class="form-group">
+<label for="tel"><b>Phone no.:</b></label>
+<input type="tel" name="tel" value="{{profile.tel}}" max="10" class="form-control" autocomplete="off">
+</div>
+<div class="form-group">
+	<label for="type"><b>Account Type: &nbsp</b></label>
+	<select name="type">
+<option value="{{profile.type}}">{{profile.type}}</option>
+{%if profile.type == "Student"%}
+<option value="Teacher">Teacher</option>
+{%else%}
+<option value="Student">Student</option>
+{%endif%}	</select>
+</div>
+{%for msg in messages%}
+<p class="alert alert-danger text-danger">{{msg}}</p>
+{%endfor%}
+<button type="submit" class="btn btn-success">Update</button>
+</form>
+	</div>
+		</div>
+	</div>
+</div>
+{%endblock%}

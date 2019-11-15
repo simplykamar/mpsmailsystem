@@ -1,0 +1,58 @@
+{%extends 'mail/basic.html'%}
+{%block title%}Sent Mail | {{user.username}} {%endblock%}
+{%block css%}
+.inbox:hover{
+	box-shadow:5px 0px black;
+	font-weight:bolder;
+}
+.list-group-item{
+	background-color:#fafafa
+}
+.font-awesome-size{
+    font-size:20px;
+}
+.font-awesome-delete:hover{
+    font-size:25px;
+    border-bottom:5px solid red;
+}
+{%endblock%}
+{%block body%}
+<div class="container-fluid">
+	<section class="my-5">
+		<div class=" mt-5 mb-3">
+	<form action="#" method="post" class="form-inline ">
+		<input type="search" value="search here..." class="form-control">
+		<button type="submit" class="btn btn-success my-1 font-weight-bolder">Search</button>
+	</form>
+	</div>
+	<div class="remove-underline list-group-item bg list-group-item-secondary pb-5 pt-4">
+		<h2 class="text-danger ml-4"><i class="fa fa-paper-plane"></i> Sentmail</h2>
+			{%for msg in messages%}
+		<p class="alert alert-success font-weight-bolder text-success" style="font-size:14px;">{{msg}}</p>
+		{%endfor%}
+{% for msg in sentmail%}
+<li class="list-group-item list-group-item-secondary inbox my-3 delhover" id="delhover{{msg.id}}">
+    <a href="/home/sentmail_view/{{msg.id}}" class="text-dark">
+   <i class="fa fa-angle-double-up font-awesome-size"></i>&nbsp<i class="fa fa-envelope font-awesome-size"></i>
+	<span class="ml-2 mr-5 ">{{msg.to_user.user.username|upper}}</span>
+	<span class="ml-5 text-primary" style="font-size:14px;">{{msg.attach.name|slice:"12:"}}</span>
+	<span class="font-weight-bolder ml-1">{{msg.sub|slice:":25"}}</span> -
+	<span class="ml-2">{{msg.msg|slice:":50"}}........</span></a>
+	<span class="float-right"><a href="/home/delete_sent_mail\{{msg.id}}" class="text-danger"><i class="fa fa-trash mr-5 font-awesome-size font-awesome-delete font-awesome-delete delete-inbox" id="del{{msg.id}}"></i></a><span class="badge badge-warning">{{msg.date}}</span></span>
+</li>
+{%endfor%}
+</div>
+</section>
+</div>
+{%endblock%}
+{%block js%}
+$('.delete-inbox').hide();
+$('.delhover').hover(function(){
+    var id=this.id.slice(8)
+    $('#del'+id).toggle();
+});
+$('.delete-inbox').click(function(){
+    console.log(this.id);
+});
+
+{%endblock%}

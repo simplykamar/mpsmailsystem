@@ -1,0 +1,83 @@
+{%extends 'mail/basic.html'%}
+{%block title%}Inbox | {{user.username}} {%endblock%}
+{%block css%}
+.font-awesome-size{
+    font-size:20px;
+}
+.font-awesome-delete:hover{
+    font-size:25px;
+    border-bottom:5px solid red;
+}
+.msg{
+	font-size:20px;
+}
+.inbox-view-attach-file{
+    font-size:50px;
+}
+.list-group-item{
+	background-color:white;
+}
+{%endblock%}
+{%block body%}
+<div class="container-fluid">
+<section class="mt-5">
+    	   {%for msg in messages%}
+		{%if "success" in msg.tags%}
+		<p class="alert alert-success font-weight-bolder text-success" style="font-size:14px;">{{msg}}</p>
+		{%else%}
+		<p class="alert alert-danger font-weight-bolder text-danger" style="font-size:14px;">{{msg}}</p>
+		{%endif%}
+		{%endfor%}
+	<div class="list-group-item">
+	<hr><h4 class="d-inline">{{inbox_view.sub}}...</h4><span class="float-right ">
+	    {%if inbox_view.starred%}
+	<a href="#" id="delete_starred" class="text-warning"><i class="fa fa-star font-awesome-size font-awesome-delete"></i></a>
+	{%else%}
+	<a href="#" id="save_starred" class="text-info"><i class="fa fa-star font-awesome-size font-awesome-delete starred-inbox" id="starred{{msg.id}}"></i></a>
+	{%endif%}
+	</span>
+	<hr>
+	<a href="/media/{{inbox_view.from_user.pic}}"><img src="/media/{{inbox_view.from_user.pic}}" class=" img-inbox-sentmail rounded-circle float-left mr-4"></a>
+		<b>{{inbox_view.from_user.user.email}}</b>
+		<b><p>to me</p></b><br>
+		<p>From: {{inbox_view.from_user.user.email}}</p>
+		<p>To: {{inbox_view.profile.user.email}}</p>
+		<p>Date: {{inbox_view.date}}</p><br>
+		{%if inbox_view.attach%}
+		<div class="ml-5"><i class="fa fa-file mr-5 text-secondary inbox-view-attach-file"></i><br></div>
+		<a href="/media/{{inbox_view.attach}}" style="font-size:14px;">{{inbox_view.attach.name|slice:"12:"}}</a><br><br>
+		{%endif%}
+		<p class="msg">{{inbox_view.msg}}</p><br><br><br>
+		<div class="row mb-5">
+		    <button class="btn btn-outline-secondary font-weight-bolder ml-4 btn-lg"><i class="fa fa-reply"></i> Reply</button>
+		<button class="btn btn-outline-secondary  font-weight-bolder ml-3 btn-lg"><i class="fa fa-share"></i> Forward</button>
+      </div><br>
+	</div>
+</section>
+</div>
+{%endblock%}
+{%block js%}
+$('#save_starred').click(function(){
+    $.ajax({
+        url:"/home/save_starred",
+        data:{"id":{{inbox_view.id}}},
+         success:function(data){
+         console.log(data)
+            location.reload();
+        }
+    });
+    return false;
+});
+
+$('#delete_starred').click(function(){
+    $.ajax({
+        url:"/home/delete_starred",
+        data:{"id":{{inbox_view.id}}},
+        success:function(data){
+        console.log(data)
+            location.reload();
+        }
+    });
+    return false;
+});
+{%endblock%}

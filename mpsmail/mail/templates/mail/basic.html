@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{%block title%} {%endblock%}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-link-style a:hover{
+	background-color: white;
+	font-weight: bolder;
+	color: red !important;
+}
+{% load static %}
+
+body{
+        min-height: 100vh;
+        position: relative;
+        margin: 0;
+    {%if user.is_authenticated%}
+    	background-image: url("{% static 'mail/img/mps1.jpg' %}");
+    	{%else%}
+    	background-image: url("{% static 'mail/img/1.jpg' %}");
+	{%endif%}
+	 background-repeat: no-repeat;
+    background-size:100% 100vh;
+    background-attachment: fixed;
+	font-family: 'Montserrat', sans-serif;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width:100%;
+}
+.navbar-link-style a{
+	color: white !important;
+}
+.remove-underline a:hover{
+	text-decoration:none;
+}
+.list-group-item{
+	word-wrap:break-word;
+}
+#profile-img{
+	width:100%;
+	height:200px;
+}
+.img-inbox-sentmail{
+	width:60px;
+	height: 60px;
+}
+.img-inbox-sentmail:hover{
+        width:61px;
+        height:61px;
+}
+.img-login{
+	width:45px;
+	height: 45px;
+}
+.small-font{
+font-size:14px;
+}
+.font-awesome-notification{
+
+    font-size:25px;
+}
+{%block css%} {%endblock%}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-danger fixed-top p-0">
+	<a href="/home" class="navbar-brand text-white font-weight-bolder">@mps.edu</a>
+	<button class="navbar-toggler" data-toggle="collapse" data-target="#mynav"><span class="navbar-toggler-icon"></span></button>
+	<div id="mynav" class="collapse navbar-collapse">
+	    	{%if user.is_authenticated%}
+<ul class="navbar-nav navbar-link-style font-weight-bolder text-center">
+		<li class="nav-item p-0"><a href="/home/inbox" class="nav-link p-3">Inbox <i class="fa fa-inbox font-awesome-notification"></i></a></li>
+	<li class="nav-item"><a href="/home/create" class="nav-link p-3">Create Mail <i class="fa fa-edit font-awesome-notification"></i></a></li>
+	<li class="nav-item"><a href="/home/sentmail" class="nav-link p-3">Sent Mail <i class="fa fa-angle-double-up font-awesome-notification"></i></a></li>
+	<li class="nav-item"><a href="/home/starred" class="nav-link p-3">Starred <i class="fa fa-star font-awesome-notification"></i></a></li>
+	<li class="nav-item "><a href="#" class="nav-link p-3" data-toggle="popover" id="noti" data-placement="bottom" data-trigger="focus" data-html="true">Notification <i class="fa fa-bell font-awesome-notification"></i><b><sup id="forhide"><h5 id="count-mail" class="d-inline bg-white text-danger font-weight-bolder px-1" style="border-radius:2px;">0</h5></sup></b></a></li>
+	</ul>
+		{%endif%}
+	<ul class="navbar-nav navbar-link-style text-center ml-auto font-weight-bolder">
+	{%if user.is_authenticated%}
+	<li class="nav-item"><a href="/account/profile" class="nav-link text-white"><img src="/media/{{user.profile.pic}}" class="img-fluid img-login rounded-circle">  <b>{{user.username|upper}}</b></a></li>
+	<li class="nav-item"><a href="/account/logout" class="nav-link text-white p-3">Logout</a></li>
+	{%else%}
+	<li class="nav-item"><a href="/account/login" class="nav-link text-white p-3">Login</a></li>
+	<li class="nav-item"><a href="/account/signup" class="nav-link text-white p-3">Register</a></li>
+	{%endif%}
+</ul>
+</div>
+</nav>
+{%block parallex-img%} {%endblock%}
+<br><br>
+<main class="my-5">
+{%block body%} {%endblock%}
+</main><br><br><br><br>
+<footer class="mt-5 pt-3 pb-2 bg-danger text-white">
+<h4 class="text-center">copyright &copy 2019-2020</h4>
+<p class="text-center">@mps.edu</p>
+</footer>
+<script type="text/javascript">
+	$(document).ready(function(){
+	$('#noti').click(function(){
+	$.ajax({
+		url:"/home/notification",
+		data:{"check":true},
+		success:function(data){
+		    console.log(data)
+			set_notification(data);
+				$('#noti').popover({html : true});
+	            $('#noti').popover('show');
+				}
+			});
+	return false;
+});});
+function set_notification(data){
+  if(data=="{}"){
+  	q="<h6 class='text-primary font-weight-bolder'>You Don't have any Notification..!</h6>"
+  		document.getElementById('noti').setAttribute('data-content',q);
+  }
+  else{
+	var q="<div class='remove-underline mt-0'>"
+	for(var noti in data){
+		q+="<a  href='/home/inbox_view/"+data[noti].mail_id+"'><img src='/media/"+data[noti].pic.slice(1,data[noti].pic.length-1)+"' class='img-fluid float-left rounded-circle img-login mr-1'><h6 > You have received one mail from "+data[noti].email+"</h6></a><hr>"
+	}
+	q+="</div>"
+	document.getElementById('noti').setAttribute('data-content',q);
+}}
+{%if user.is_authenticated%}
+	$('#forhide').hide();
+$(document).ready(function(){
+	get_count_mail()
+	function get_count_mail(){
+	$.ajax({
+		url:"/home/notification",
+		type:"get",
+		success:function(data){
+			console.log(data)
+				if(data=="not_authenticated"){
+				document.location="/account/login"
+			}
+			if(data=="{}"){
+				check=true;
+			}
+			else{
+				check=data.noti0.check
+			}
+			set_count_mail(data,check);
+			setTimeout(get_count_mail,1000);
+		}
+			});
+	return false;
+}});
+{%endif%}
+function set_count_mail(data,check){
+	console.log(check)
+	if(data=="{}" | check){
+		$('#forhide').hide();
+			}
+	else{
+		$('#forhide').show();
+		var count=0
+		for(var noti in data){
+		    if(!data[noti].check){
+			count+=1
+		    }
+		}
+		$('#count-mail').html(count)
+	}	}
+
+{%block js%} {%endblock%}
+{%include "account/pic_upload-script.html"%}
+</script>
+</body>
+</html>
+

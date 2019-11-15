@@ -1,0 +1,20 @@
+$('#pic_upload').click(function(){
+	$('#img_field').click();
+});
+$('#img_field').change(function(){
+	var data=new FormData($('#pic_form')[0]);
+	$.ajax({
+	url:"/account/change_pic/",
+	cache:false,
+	processData:false,
+	contentType:false,
+	type:'post',
+	data:data,
+	enctype:'multipart/form-data',
+	success:function(data){
+		document.location="/account/profile"
+}
+	});
+	return false;
+});
+

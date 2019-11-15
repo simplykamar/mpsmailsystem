@@ -1,0 +1,72 @@
+{%extends "mail/basic.html"%}
+{%load static%}
+{%block css%}
+.div1{
+    background-image:url("{%static 'mail/img/home-img.jpg'%}");
+}
+.div2{
+ background-image:url("{%static 'mail/img/1l.jpg'%}");
+}
+.div3{
+ background-image:url("{%static 'mail/img/bg_2.jpg'%}");
+}
+.parallax{
+    background-attachment:fixed;
+    background-position: center;
+    }
+.home-img-size{
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 700px;
+}
+.fixed{
+position:relative;
+top:50%;
+text-align:center;
+}
+{%endblock%}
+{%block parallex-img%}
+<div class="div1 parallax home-img-size"><div class="fixed"><a href="/account/login" class="btn btn-primary  btn-lg font-weight-bolder ">Try now</a></div></div>
+<div class="bg-white m-0 p-5">
+<h4>This project deals with the Mailing System. This Mailing System project is having different modules example new user create our account
+a Sign-Up form and already existing user can logged into the Mailing System named it as a login in form. This project deals with the Mailing System. This Mailing System project is having different modules example new user create our account
+a Sign-Up form and already existing user can logged into the Mailing System named it as a login in form.
+</h4></div>
+<div class="div2 parallax home-img-size"></div>
+<div class="bg-white m-0 p-5">
+    <h2>Uses of mailing system in our life:</h2>
+    <p>In professional world all the communications are being done by emails. Now a day’s mailing system is playing a very important role in
+    our social and economical life.
+It is one of the secure and fast communicating mediums for a modern era. The mail system is also a good source to connect with your friends;
+Mailing system helps you to send emails to your friends, who are already registered. It allows a user to transfer text and data like picture, video, mp3, etc.
+In mailing system, a user can register herself/himself. After registration, they can login with their existing user id and password.
+The mailing system allows the user to customize their profile, change themes as per own interest.
+Mailing system is also a very secure system. It provides you security as you needed your profile is protected with a password.
+You can change the password when you feel insecure with the old password. There is also the password recovery
+system in case you forgot your password you can recover your profile by verifying your security question.</p><br>
+<div class="row">
+    <div class="col-xl-6 col-md-6 col-sm-6 col-12">
+        <a href="{%static 'mail/img/cap1.PNG'%}"><img src="{%static 'mail/img/cap1.PNG'%}" class="img-fluid"></a>
+        <a href="{%static 'mail/img/cap2.PNG'%}"><img src="{%static 'mail/img/cap2.PNG'%}" class="img-fluid"></a>
+        <a href="{%static 'mail/img/cap3.PNG'%}"><img src="{%static 'mail/img/cap3.PNG'%}" class="img-fluid"></a>
+    </div>
+    <div class="col-xl-6 col-md-6 col-sm-6 col-12">
+        <h2 class="mt-5">Limition of file attachment:</h2>
+    <p>As you know that in whatsApp you cannot send file more than 100MB and in Gmail 25MB, But what if, if you want to send file more than 100MB, this problem is overcome by @mps mail system, in @mps mail you can send file upto 500MB.</p>
+    </div>
+</div>
+</div>
+<div class="div3 parallax home-img-size"></div>
+<div class="bg-white m-0 p-5">
+<h2>@mps Mailing system must be able to do these functions</h2>
+<li>Compose an email.</li>
+<li>Send an email</li>
+<li>Receive an email</li>
+<li>Saving an email in the form of draft</li>
+<li>Showing the detail of the received mail</li>
+<li>Get Notification(if someone send mail,if you change password or profile detail)</li>
+<li>Secured by password</li>
+<li>Recovery of the password</li><br>
+<h4><i class="fa fa-envelope font text-primary"></i> support@mps.edu</h4>
+</div>
+{%endblock%}

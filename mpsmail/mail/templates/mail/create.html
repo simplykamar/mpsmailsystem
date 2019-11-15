@@ -1,0 +1,47 @@
+{%extends "mail/basic.html"%}
+{%block title%}Compose Mail | {{user.username}} {%endblock%}
+{%block css%}
+.increase-input input{
+	width: 50%;
+	padding:5px;
+}
+textarea{
+	width:80vw;
+	height:20vw;
+}
+.list-group-item{
+	background-color:#fafafa
+}
+{%endblock%}
+{%block body%}
+<section>
+	<div class="container-fluid">
+		<div class="list-group-item">
+		<hr><h2 class="text-danger ml-5"><i class="fa fa-edit"></i>Compose new mail</h2><hr>
+	<form action="/home/create/" method="post" class="my-2" enctype="multipart/form-data">{%csrf_token%}
+		<div class="form-group increase-input">
+			<label for="from" class=""><b>From:</b></label><br>
+			<input type="text" disabled="true" value="{{user.email}}">
+		</div>
+		<div class="form-group increase-input">
+			<label for="to_email" class=" "><b>To:</b></label><br>
+			<input type="text" name="to_email" placeholder="Receipent email address" autocomplete="off">
+		</div>
+		{%for msg in messages%}
+		<p class="alert alert-danger text-danger font-weight-bolder" style="font-size:14px;">{{msg}}</p>
+		{%endfor%}
+	<div class="form-group">
+		<b>{{form.sub.label_tag}}</b> {{form.sub}}{{form.sub.errors}}
+		</div>
+		<div class="form-group">
+		<b><i class="fa fa-paperclip font-awesome-notification"></i> {{form.attach.label_tag}}</b><br> {{form.attach}}{{form.attach.errors}}
+		</div>
+		<div class="form-group">
+		<b>{{form.msg.label_tag}} </b><br>{{form.msg}}{{form.msg.errors}}
+		</div>
+		<button type="submit" class="btn btn-success px-4 font-weight-bolder" >Send</button>
+	</form>
+</div>
+</div>
+</section>
+{%endblock%}

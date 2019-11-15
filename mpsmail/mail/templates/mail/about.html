@@ -1,0 +1,74 @@
+{%extends 'mail/basic.html'%}
+{%load static%}
+{%block css%}
+.team-img{
+    width:15vw;
+    height:15vw;
+}
+.team-img:hover{
+    width:15.3vw;
+    height:15.3vw;
+    border:10px solid #ffe06e;
+}
+{%endblock%}
+{%block body%}
+<div class="container">
+<h2 class="list-group-item text-center bg-success text-white">About @mps.edu</h2><br>
+<p>hello world! hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world
+!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!he
+llo world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello
+world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world
+!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello
+world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hell
+o world!hello world!held!hello world!hello world!hello world!hello world!held!hello world!hello world!hello world!hell
+o world!held!hello world!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!
+hello world!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello world
+!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello world!hello world!hello world!
+hello world!held!hellolo world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hel
+world!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello world
+!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello world!hello world!hel
+d!hello world!hello world!hello world!hello world!held!hello world!hlo world!hello world!hello world!hello world!hel
+ello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello wlo world!hello world!hel
+orld!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello worl
+d!hello world!hello world!hello world!held!hellolo world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hel
+world!hello world!hello world!hello world!held!hello world!hello world!hello world!hello world!held!hello world
+!hello world!hello world!hello world!hello world!hello world!hello world!</p>
+<h2 class="list-group-item text-center bg-danger text-white">Our Team</h2><br>
+<div class="row text-center">
+	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+		<img src="{%static 'mail/img/team1.jpg'%}" class="img-fluid rounded-circle team-img" id="team1-hover"><br><br>
+		<div id="team1">
+		<h4>Apple</h4>
+		<hr class="mx-auto bg-dark w-50">
+		</div>
+	</div>
+	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+		<img src="{%static 'mail/img/team1.jpg'%}" class="img-fluid rounded-circle team-img" id="team2-hover"><br><br>
+		<div id="team2">
+		<h4>Apple</h4>
+		<hr class="mx-auto bg-dark w-50">
+		</div>
+	</div>
+	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+		<img src="{%static 'mail/img/team1.jpg'%}" class="img-fluid rounded-circle team-img" id="team3-hover"><br><br>
+		<div id="team3">
+		<h4>Apple</h4>
+		<hr class="mx-auto bg-dark w-50">
+	    </div>
+    </div>
+</div>
+{%endblock%}
+{%block js%}
+$('#team1').hide();
+$('#team2').hide();
+$('#team3').hide();
+$('#team1-hover').hover(function(){
+    $('#team1').toggle("slow");
+});
+$('#team2-hover').hover(function(){
+    $('#team2').toggle("slow");
+});
+$('#team3-hover').hover(function(){
+    $('#team3').toggle("slow");
+});
+{%endblock%}

@@ -1,0 +1,14 @@
+
+<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col-12 mb-5">
+	<h6 class="list-group-item p-1 bg-danger text-white">Picture<span class="float-right" id="pic_upload"><a href="#" class="text-white">|change|</a></span></h6>
+	<form id="pic_form" method="post" enctype="multipart/form-data">{%csrf_token%}
+		<input type="file" name="img" id="img_field" class="d-none">
+	</form>
+	<div class="list-group-item pt-3 pl-3">
+	<a href="/account/profile"><img src="/media/{{profile.pic}}" class="img-fluid p-0" id="profile-img"></a>
+</div>
+<ul class="list-group-item p-0 pt-2">
+<a href="/account/edit_profile" class="list-group-item bg-success list-group-item-action small-font text-white font-weight-bolder">Edit my profile</a>
+<a href="/account/change_password_confirm" class="list-group-item bg-success list-group-item-action small-font text-white mt-1 font-weight-bolder">Change password</a>
+   </ul>
+</div>

@@ -1,0 +1,29 @@
+{%extends 'mail/basic.html'%}
+{%block title%}{{user.username|title}} | Profile{%endblock%}
+{%block css%}
+
+{%endblock%}
+{%block body%}
+<div class="container">
+    {%for msg in messages%}
+        <p style="font-size:14px;" class="alert alert-success text-success font-weight-bolder">{{msg}}</p>
+    {%endfor%}
+<div class="row">
+{%include "account/profile_basic.html"%}
+	<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12">
+		<h6 class="list-group-item bg-danger text-white font-weight-bolder"> Account <span class="float-right" id="pic_upload"><a href="/account/edit_profile" class="text-white">|edit|</a></span></h6>
+	<div class="list-group-item ">
+		<div class="ml-3">
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">First Name:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.user.first_name|title}}</div></div><hr>
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Last Name:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.user.last_name|title}}</div></div><hr>
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Username:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.user.username}}</div></div><hr>
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Phone no:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.tel}}</div></div><hr>
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Contact info:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.user.email}}</div></div><hr>
+		    <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Gender:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.gender}}</div></div><hr>
+            <div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6">Account type:</div><div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-6 text-primary">{{profile.type}}</div></div>
+	</div>
+	</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
